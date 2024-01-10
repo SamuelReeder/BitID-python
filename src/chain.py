@@ -9,6 +9,7 @@ class Chain:
         self.public = public
         self.blocks = []
         self.unconfirmed_transactions = []
+        self.key = 0
         self.genesis_block()
         
     
@@ -22,8 +23,8 @@ class Chain:
         if prev_hash != block.prev_hash:
             return False
         
-        # if not Block.is_valid(block):
-        #     return False
+        if not block.is_valid():
+            return False
         
         block.compute_hash()
         self.blocks.append(block)
@@ -31,3 +32,7 @@ class Chain:
     
     def broadcast_block(self, block):
         pass
+    
+    def get_key(self):
+        return self.key
+    
